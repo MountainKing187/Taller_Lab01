@@ -64,10 +64,22 @@ public class Main {
 
         if (validarDimensiones(filas, cols)) {
             matriz = crearMatriz(filas, cols);
+            matriz = llenarMatriz(matriz);
         }
         if (matriz== null){
             System.out.println("aaaaa");
         }
+
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                System.out.print(matriz[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+        ejecutarMostrarFila(matriz,sc);
+
         return matriz;
     }
 
@@ -83,5 +95,39 @@ public class Main {
 
     public static int[][] crearMatriz(int filas, int cols){
         return new int[filas][cols];
+    }
+
+    public static int[][] llenarMatriz(int matriz [][] ) {
+        int[][] matriz_llena = new int[matriz.length][matriz[0].length];
+        int num_ran;
+
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length ; j++) {
+                num_ran = (int) Math.rint(Math.random() * 10);
+                if (num_ran == 10){
+                    num_ran --;
+                }
+                matriz_llena[i][j] = num_ran;
+            }
+        }
+        return matriz_llena;
+    }
+
+    public static void ejecutarMostrarFila(int[][] matriz,Scanner sc){
+        System.out.println("Ingrese el indice de la fila que quiera ver: ");
+        int fila = sc.nextInt() - 1;
+
+        if (fila <= matriz.length && fila >= 0){
+            mostrarFila(matriz,fila);
+        } else {
+            System.out.println("Ingreso un dato no valido.");
+        }
+    }
+
+    public static void mostrarFila(int[][] matriz, int fila){
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.print(matriz[fila][i]);
+            System.out.print(" ");
+        }
     }
 }
